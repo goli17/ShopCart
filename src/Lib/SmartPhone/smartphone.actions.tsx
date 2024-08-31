@@ -20,6 +20,7 @@ export const getProductById = createAsyncThunk(
   async (id: any, thunkApi) => {
     try {
       const response = await axiosInstance.get(`/products/${id}`);
+      console.log("->>", response.data);
       return response.data;
     } catch (err: any) {
       toastErrorMessage(err?.response?.data?.message);

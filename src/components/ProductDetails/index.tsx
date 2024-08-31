@@ -1,21 +1,23 @@
 "use client";
 import Image from "next/image";
-import { getProductById } from "@/Lib/SmartPhone/smartphone.actions";
+import { getAllProduct } from "@/Lib/SmartPhone/smartphone.actions";
 import { useAppDispatch, useAppSelector } from "@/Lib/hooks";
 import { getAllProductSelector } from "@/Lib/SmartPhone/smartphone.selector";
 import { useEffect } from "react";
 
 export default function ProductDetails({ params }: any) {
   const dispatch = useAppDispatch();
-
   useEffect(() => {
-    dispatch(getProductById(1));
+    dispatch(getAllProduct());
   }, [dispatch]);
   const { products } = useAppSelector(getAllProductSelector);
-  console.log("->");
+  const product = products?.find(
+    (product: any) => product.id === Number(params.params.id)
+  );
+
   return (
     <>
-      {products?.map((product: any) => (
+      {product ? (
         <div className="flex flex-col w-full md:flex-row gap-8 p-5">
           {/* Section 1: Product Image */}
           <div className="flex-1 flex justify-center items-start">
@@ -44,7 +46,6 @@ export default function ProductDetails({ params }: any) {
             <p className="text-md text-gray-500">
               Shipping: {product.shippingInformation}
             </p>
-            {/* Add more details as needed */}
           </div>
 
           {/* Section 3: Product Reviews */}
@@ -70,7 +71,9 @@ export default function ProductDetails({ params }: any) {
             )}
           </div>
         </div>
-      ))}
+      ) : (
+        <p>Product not found.</p>
+      )}
     </>
   );
 }
