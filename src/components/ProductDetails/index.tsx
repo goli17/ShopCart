@@ -2,6 +2,7 @@
 import Image from "next/image";
 import {
   getAllProduct,
+  getGroceries,
   getSmartPhone,
 } from "@/Lib/SmartPhone/smartphone.actions";
 import { useAppDispatch, useAppSelector } from "@/Lib/hooks";
@@ -14,8 +15,10 @@ export default function ProductDetails({ params }: any) {
 
   useEffect(() => {
     const debouncedDispatch = setTimeout(() => {
-      if (params.params.id < 30) {
+      if (params.params.id < 16) {
         dispatch(getAllProduct());
+      } else if (params.params.id >= 16 && params.params.id < 46) {
+        dispatch(getGroceries());
       } else {
         dispatch(getSmartPhone());
       }
