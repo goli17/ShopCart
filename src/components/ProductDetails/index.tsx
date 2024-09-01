@@ -117,7 +117,9 @@ export default function ProductDetails({ params }: any) {
           </div>
           <div className="text-[25px] w-full  m-auto  flex flex-col gap-1">
             <div className="w-full flex flex-wrap py-[100px] bg-gray-900 px-1">
-              <h1 className="text-[40px] text-white font-bold px-4">Sale</h1>
+              <h1 className="text-[40px] text-white font-bold px-4">
+                Similar Products
+              </h1>
               <hr className="text-white p-2 h-2 w-full"></hr>
               <div className=" w-full flex pb-5 flex-row flex-wrap  max-md:grid max-md:grid-cols-2 items-center justify-center gap-4">
                 {products &&
