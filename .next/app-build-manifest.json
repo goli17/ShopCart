@@ -18,10 +18,10 @@
       "static/css/app/pages/products/page.css",
       "static/chunks/app/pages/products/page.js"
     ],
-    "/pages/product/[id]/[[...params]]/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/pages/product/[id]/[[...params]]/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

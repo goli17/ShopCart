@@ -13,7 +13,7 @@ export default function Footer() {
               className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
             >
               <Image src={Logo} alt="Logo" width={50} height={50} />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+              <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
                 ShopCart
               </span>
             </Link>

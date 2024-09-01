@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Poster from "@/assets/hero-slider-2-min.jpg";
-import Poster2 from "@/assets/hero-slider-1-min.jpg";
+import Poster2 from "@/assets/hero-slider-3-min.jpg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getAllProduct } from "@/Lib/SmartPhone/smartphone.actions";
@@ -78,19 +78,18 @@ export default function HomePage(params: any) {
         />
         <div className="absolute inset-0 flex items-center justify-center text-center text-white">
           <div className="px-4">
-            <span className="text-6xl max-md:text-[20px] max-md:leading-1 font-bold mb-4 max-md:mb-0 flex items-center">
-              Sell products the easy way with ShopCart
-              <Image src={Logo} alt={".."} height={50} width={50} />
-            </span>
+            <p className="text-6xl max-md:text-[20px] max-md:leading-1 font-bold mb-4 max-w-[1300px] max-md:mb-0 flex  items-center">
+              Discover unbeatable deals and endless choices{" "}
+            </p>
             <p className="text-2xl max-md:text-sm mb-8 max-md:mb-2 max-md:leading-0">
-              Explore the best way to showcase your products.
+              just a click—shop smart, shop easy!
             </p>
             <Link href="/pages/products">
               <button
                 className="inline-block font-bold max-md:font-[400] bg-gray-900 text-white hover:text-blue-500 rounded-lg max-md:py-2 max-md:px-4 py-4 px-8 transition"
                 onClick={() => router.push("/pages/products")}
               >
-                Explore now
+                Shop now
               </button>
             </Link>
           </div>
