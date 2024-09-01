@@ -27,6 +27,7 @@
     "/pages/product/[id]/[[...params]]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+      "static/css/app/pages/product/[id]/[[...params]]/page.css",
       "static/chunks/app/pages/product/[id]/[[...params]]/page.js"
     ],
     "/_not-found/page": [
