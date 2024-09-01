@@ -1,4 +1,4 @@
-import Products from "@/components/SmartPhones";
+import Products from "@/components/Phone";
 
 export default function Product() {
   return (

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/Lib/hooks";
 import { getAllProductSelector } from "@/Lib/SmartPhone/smartphone.selector";
 import { useEffect } from "react";
 import ProductCard from "../Cards/ProductCard";
-export default function SmartPhones() {
+export default function Phone() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getSmartPhone());
