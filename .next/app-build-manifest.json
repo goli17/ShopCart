@@ -1,56 +1,39 @@
 {
   "pages": {
-    "/_not-found/page": [
-      "static/chunks/webpack-75e2b3f4a8279f3b.js",
-      "static/chunks/fd9d1056-4e1a26e2d413ba3c.js",
-      "static/chunks/23-eb88de87c5d20cc6.js",
-      "static/chunks/main-app-803f8bca9f5a4ed8.js",
-      "static/chunks/app/_not-found/page-2418f8e8c448e349.js"
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/page.css",
+      "static/chunks/app/page.js"
     ],
     "/layout": [
-      "static/chunks/webpack-75e2b3f4a8279f3b.js",
-      "static/chunks/fd9d1056-4e1a26e2d413ba3c.js",
-      "static/chunks/23-eb88de87c5d20cc6.js",
-      "static/chunks/main-app-803f8bca9f5a4ed8.js",
-      "static/css/e49eedb6a5fb3e30.css",
-      "static/chunks/370-ebc21e41604a7d3d.js",
-      "static/chunks/app/layout-48ce7494c136d1e7.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/pages/groceries/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/pages/groceries/page.css",
+      "static/chunks/app/pages/groceries/page.js"
     ],
     "/pages/phones/page": [
-      "static/chunks/webpack-75e2b3f4a8279f3b.js",
-      "static/chunks/fd9d1056-4e1a26e2d413ba3c.js",
-      "static/chunks/23-eb88de87c5d20cc6.js",
-      "static/chunks/main-app-803f8bca9f5a4ed8.js",
-      "static/css/03460dc225448bf4.css",
-      "static/chunks/370-ebc21e41604a7d3d.js",
-      "static/chunks/app/pages/phones/page-5d57a1a19843f4fe.js"
-    ],
-    "/page": [
-      "static/chunks/webpack-75e2b3f4a8279f3b.js",
-      "static/chunks/fd9d1056-4e1a26e2d413ba3c.js",
-      "static/chunks/23-eb88de87c5d20cc6.js",
-      "static/chunks/main-app-803f8bca9f5a4ed8.js",
-      "static/css/03460dc225448bf4.css",
-      "static/chunks/370-ebc21e41604a7d3d.js",
-      "static/chunks/app/page-0450a81d698e64e3.js"
-    ],
-    "/pages/products/page": [
-      "static/chunks/webpack-75e2b3f4a8279f3b.js",
-      "static/chunks/fd9d1056-4e1a26e2d413ba3c.js",
-      "static/chunks/23-eb88de87c5d20cc6.js",
-      "static/chunks/main-app-803f8bca9f5a4ed8.js",
-      "static/css/03460dc225448bf4.css",
-      "static/chunks/370-ebc21e41604a7d3d.js",
-      "static/chunks/app/pages/products/page-7bedcb22a62d28e9.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/pages/phones/page.css",
+      "static/chunks/app/pages/phones/page.js"
     ],
     "/pages/product/[id]/[[...params]]/page": [
-      "static/chunks/webpack-75e2b3f4a8279f3b.js",
-      "static/chunks/fd9d1056-4e1a26e2d413ba3c.js",
-      "static/chunks/23-eb88de87c5d20cc6.js",
-      "static/chunks/main-app-803f8bca9f5a4ed8.js",
-      "static/css/03460dc225448bf4.css",
-      "static/chunks/370-ebc21e41604a7d3d.js",
-      "static/chunks/app/pages/product/[id]/[[...params]]/page-287645aa7636592a.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/pages/product/[id]/[[...params]]/page.css",
+      "static/chunks/app/pages/product/[id]/[[...params]]/page.js"
+    ],
+    "/pages/login/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/pages/login/page.js"
     ]
   }
 }

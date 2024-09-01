@@ -1,8 +1,13 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "@/assets/icon.png";
-
+import { usePathname } from "next/navigation";
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname.includes("/login")) {
+    return null;
+  }
   return (
     <div className="flex flex-col  ">
       <footer className="bg-gray-900 shadow dark:bg-gray-900 mt-auto">

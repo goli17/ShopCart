@@ -41,3 +41,16 @@ export const getSmartPhone = createAsyncThunk(
     }
   }
 );
+
+export const getGroceries = createAsyncThunk(
+  "product/getById",
+  async (_, thunkApi) => {
+    try {
+      const response = await axiosInstance.get(`/products/category/groceries`);
+      return response.data;
+    } catch (err: any) {
+      toastErrorMessage(err?.response?.data?.message);
+      return thunkApi.rejectWithValue(err?.response?.data);
+    }
+  }
+);

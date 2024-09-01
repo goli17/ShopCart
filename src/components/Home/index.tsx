@@ -55,7 +55,7 @@ export default function HomePage(params: any) {
           <div className=" w-full flex pb-5 flex-row flex-wrap  max-md:grid max-md:grid-cols-2 items-center justify-center gap-4">
             {products &&
               products
-                .slice(0, 5)
+                .slice(0, 4)
                 ?.map((product: any) => (
                   <ProductCard
                     key={product.id}

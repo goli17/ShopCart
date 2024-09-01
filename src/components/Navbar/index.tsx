@@ -3,22 +3,39 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/assets/icon.png";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleAuthAction = () => {
+    if (isAuthenticated) {
+      setIsAuthenticated(false);
+    } else {
+      router.push(`/pages/login`);
+      setIsAuthenticated(true);
+    }
+  };
+
+  if (pathname.includes("/login")) {
+    return null;
+  }
+
   return (
-    <nav className="stiky text-white bg-gray-900">
-      <div className=" flex flex-wrap items-center justify-between mx-auto p-4">
+    <nav className="sticky text-white bg-gray-900">
+      <div className="flex max-w-[1900px] flex-wrap items-center justify-between mx-auto p-4">
         <Link
           href="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <Image src={Logo} alt=" Logo" width={50} height={50} />
+          <Image src={Logo} alt="Logo" width={50} height={50} />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             ShopCart
           </span>
@@ -53,7 +70,7 @@ export default function Navbar() {
           } w-full md:block md:w-auto`}
           id="navbar-default"
         >
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 text-white bg-gray-900 dark:border-gray-700">
+          <ul className="font-medium flex flex-col gap-10 p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 text-white bg-gray-900 dark:border-gray-700">
             <li>
               <Link
                 href="/"
@@ -65,7 +82,7 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                href="/pages/smartphones"
+                href="/pages/phones"
                 className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
                 SmartPhones
@@ -73,10 +90,10 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                href="/pages/products"
+                href="/pages/groceries"
                 className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
-                Products
+                Daily Products
               </Link>
             </li>
             <li>
@@ -84,16 +101,16 @@ export default function Navbar() {
                 href="#"
                 className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
-                Pricing
+                Cart
               </Link>
             </li>
             <li>
-              <Link
-                href="#"
+              <button
+                onClick={handleAuthAction}
                 className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
-                Contact
-              </Link>
+                {isAuthenticated ? "Logout" : "Login"}
+              </button>
             </li>
           </ul>
         </div>
