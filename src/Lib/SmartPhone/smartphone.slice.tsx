@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getAllProduct, getProductById } from "./smartphone.actions";
+import {
+  getAllProduct,
+  getProductById,
+  getSmartPhone,
+} from "./smartphone.actions";
 
 interface Dimensions {
   width: number;
@@ -47,6 +51,7 @@ interface Product {
 
 export type ProductsState = {
   products: Product[];
+  product: Product[];
   total: number;
   skip: number;
   limit: number;
@@ -54,6 +59,7 @@ export type ProductsState = {
 
 const initialState: ProductsState = {
   products: [],
+  product: [],
   total: 0,
   skip: 0,
   limit: 30,
@@ -63,6 +69,7 @@ const productsSlice = createSlice({
   name: "products",
   initialState: {
     allProducts: [] as Product[],
+    Product: [] as Product[],
     productLoading: false,
   } as unknown as ProductsState,
   reducers: {},

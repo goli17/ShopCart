@@ -18,6 +18,17 @@
       "static/css/app/pages/products/page.css",
       "static/chunks/app/pages/products/page.js"
     ],
+    "/pages/smartphones/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/pages/smartphones/page.css",
+      "static/chunks/app/pages/smartphones/page.js"
+    ],
+    "/pages/product/[id]/[[...params]]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/pages/product/[id]/[[...params]]/page.js"
+    ],
     "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",

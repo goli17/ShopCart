@@ -21,7 +21,7 @@ export default function HomePage(params: any) {
   const { products } = useAppSelector(getAllProductSelector);
 
   return (
-    <div className="flex flex-col gap-5 pb-3 relative">
+    <div className="flex flex-col gap-1 pb-3 relative">
       <div className="relative w-full">
         <Image
           src={Poster}
@@ -48,14 +48,14 @@ export default function HomePage(params: any) {
           </div>
         </div>
       </div>
-      <div className="text-[25px] p-1 flex flex-col gap-2">
-        <div className="w-full flex flex-wrap p-5  bg-gray-900">
+      <div className="text-[25px] w-full  m-auto  flex flex-col gap-2">
+        <div className="w-full flex flex-wrap py-[100px] bg-gray-900">
           <h1 className="text-[40px] text-white font-bold px-4">Sale</h1>
           <hr className="text-white p-2 h-2 w-full"></hr>
-          <div className=" w-full flex pb-5 flex-row  max-md:grid max-md:grid-cols-2 items-center justify-center gap-4">
+          <div className=" w-full flex pb-5 flex-row flex-wrap  max-md:grid max-md:grid-cols-2 items-center justify-center gap-4">
             {products &&
               products
-                .slice(0, 4)
+                .slice(0, 5)
                 ?.map((product: any) => (
                   <ProductCard
                     key={product.id}
@@ -74,7 +74,7 @@ export default function HomePage(params: any) {
         <Image
           src={Poster2}
           alt="Poster Image"
-          className="w-[1440px] m-auto max-h-[900px]"
+          className="w-full m-auto max-h-[900px]"
         />
         <div className="absolute inset-0 flex items-center justify-center text-center text-white">
           <div className="px-4">

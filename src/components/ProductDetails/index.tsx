@@ -1,15 +1,27 @@
 "use client";
 import Image from "next/image";
-import { getAllProduct } from "@/Lib/SmartPhone/smartphone.actions";
+import {
+  getAllProduct,
+  getSmartPhone,
+} from "@/Lib/SmartPhone/smartphone.actions";
 import { useAppDispatch, useAppSelector } from "@/Lib/hooks";
 import { getAllProductSelector } from "@/Lib/SmartPhone/smartphone.selector";
 import { useEffect } from "react";
 
 export default function ProductDetails({ params }: any) {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    dispatch(getAllProduct());
-  }, [dispatch]);
+    const debouncedDispatch = setTimeout(() => {
+      if (params.params.id < 30) {
+        dispatch(getAllProduct());
+      } else {
+        dispatch(getSmartPhone());
+      }
+    }, 300);
+    return () => clearTimeout(debouncedDispatch);
+  }, [dispatch, params.params.id]);
+
   const { products } = useAppSelector(getAllProductSelector);
   const product = products?.find(
     (product: any) => product.id === Number(params.params.id)
@@ -18,16 +30,30 @@ export default function ProductDetails({ params }: any) {
   return (
     <>
       {product ? (
-        <div className="  flex flex-col w-full md:flex-row gap-8 p-5">
+        <div className="flex flex-col w-full md:flex-row gap-8 p-5">
           {/* Section 1: Product Image */}
-          <div className="flex-1 flex justify-center items-start">
+          <div className="flex-1 flex flex-col gap-5 justify-center items-start">
             <Image
               src={product.thumbnail}
               alt={product.title}
               width={400}
               height={400}
-              className="object-contain"
+              className="object-contain border-2"
             />
+            <p className="w-full  flex items-center gap-2 ">
+              {product.images
+                .slice(1, 3)
+                .map((image: string, index: number) => (
+                  <Image
+                    key={index}
+                    src={image}
+                    alt={product.title}
+                    width={150}
+                    height={150} // Fixed height for consistency
+                    className="object-cover border-2 w-[200px] h-[200px]  overflow-hidden"
+                  />
+                ))}
+            </p>
           </div>
 
           {/* Section 2: Product Details */}

@@ -20,7 +20,20 @@ export const getProductById = createAsyncThunk(
   async (id: any, thunkApi) => {
     try {
       const response = await axiosInstance.get(`/products/${id}`);
-      console.log("->>", response.data);
+      return response.data;
+    } catch (err: any) {
+      toastErrorMessage(err?.response?.data?.message);
+      return thunkApi.rejectWithValue(err?.response?.data);
+    }
+  }
+);
+export const getSmartPhone = createAsyncThunk(
+  "product/getById",
+  async (_, thunkApi) => {
+    try {
+      const response = await axiosInstance.get(
+        `/products/category/smartphones`
+      );
       return response.data;
     } catch (err: any) {
       toastErrorMessage(err?.response?.data?.message);
