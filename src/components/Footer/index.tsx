@@ -4,8 +4,8 @@ import Logo from "@/assets/icon.png";
 
 export default function Footer() {
   return (
-    <div className="flex flex-col min-h-[56vh] max-md:min-h-[30vh]">
-      <footer className="bg-white shadow dark:bg-gray-900 mt-auto">
+    <div className="flex flex-col  ">
+      <footer className="bg-gray-900 shadow dark:bg-gray-900 mt-auto">
         <div className="w-full p-4 md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <Link

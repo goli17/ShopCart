@@ -18,7 +18,7 @@ export default function ProductDetails({ params }: any) {
   return (
     <>
       {product ? (
-        <div className="flex flex-col w-full md:flex-row gap-8 p-5">
+        <div className="  flex flex-col w-full md:flex-row gap-8 p-5">
           {/* Section 1: Product Image */}
           <div className="flex-1 flex justify-center items-start">
             <Image
@@ -33,8 +33,20 @@ export default function ProductDetails({ params }: any) {
           {/* Section 2: Product Details */}
           <div className="flex-1">
             <h1 className="text-3xl font-semibold mb-4">{product.title}</h1>
+            <p className="text-lg text-gray-600 mb-4">
+              {product.category.toUpperCase()}
+            </p>
+
             <p className="text-lg text-gray-600 mb-4">{product.description}</p>
-            <p className="text-xl font-bold mb-4">Price: ${product.price}</p>
+            <div className="flex items-center justify-between">
+              <p className="text-xl font-bold mb-4">
+                Price: ₹ {(product.price * 83.89).toFixed(2)}
+              </p>
+              <p className="text-md p-1 text-white text-center font-bold bg-green-500 mb-4">
+                {product.discountPercentage}% OFF
+              </p>
+            </div>
+
             <p className="text-md text-gray-500">SKU: {product.sku}</p>
             <p className="text-md text-gray-500">Brand: {product.brand}</p>
             <p className="text-md text-gray-500">
@@ -45,6 +57,9 @@ export default function ProductDetails({ params }: any) {
             </p>
             <p className="text-md text-gray-500">
               Shipping: {product.shippingInformation}
+            </p>
+            <p className="text-md text-gray-500 flex items-center">
+              Rating: {product.rating.toFixed(0)}+
             </p>
           </div>
 

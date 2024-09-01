@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import "./ProductCard.scss";
@@ -42,7 +43,9 @@ export default function ProductCard({
         <p className=" text-[15px] font-normal text-gray-700 dark:text-gray-400 h-[50px] overflow-hidden text-ellipsis line-clamp-2">
           {description}
         </p>
-        <p className="text-[18px] font-bold">Price: ${price}</p>
+        <p className="text-[18px] font-bold">
+          Price: ₹{(price * 83.89).toFixed(0)}
+        </p>
         <p
           className="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           onClick={() => router.push(`/pages/product/${id}`)}
