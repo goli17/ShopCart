@@ -27,7 +27,7 @@ export default function ProductCard({
       <Link href="#" className="">
         <div className="flex items-center justify-center">
           <Image
-            className="h-[200px] w-[200px] object-fit items-center object-contain "
+            className=" p-[1.25rem] h-[200px] w-[200px] object-fit items-center object-contain "
             src={image}
             alt=""
             width={400}
