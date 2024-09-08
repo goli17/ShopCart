@@ -1,5 +1,47 @@
-#typescript
+# Dependency directories
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Environment variables
 .env
-node_modules
-..next
-.next
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# MacOS files
+.DS_Store
+
+# Typescript cache and output
+*.tsbuildinfo
+
+# Optional: Ignore the generated lock files (choose one based on your package manager)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Optional: Ignore IDE/editor specific files (add based on your editor)
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Ignore build output
+dist/
+
+# Ignore coverage files
+coverage/
+
+# Git-specific files
+*.orig
+
+# Optional: Ignore linting files
+.eslintcache
