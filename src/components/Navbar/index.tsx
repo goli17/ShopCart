@@ -4,12 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/assets/icon.png";
 import { useRouter, usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 import LoginComponent from "../LoginComponent"; // Ensure this is a modal component
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { data: session, status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -18,8 +19,8 @@ export default function Navbar() {
   };
 
   const handleAuthAction = () => {
-    if (isAuthenticated) {
-      setIsAuthenticated(false);
+    if (status === "authenticated") {
+      signOut();
     } else {
       setIsModalOpen(true);
     }
@@ -32,6 +33,8 @@ export default function Navbar() {
   if (pathname.includes("/login")) {
     return null;
   }
+
+  const firstName = session?.user?.name?.split(" ")[0]; // Extract first name from session
 
   return (
     <>
@@ -110,12 +113,23 @@ export default function Navbar() {
                   Cart
                 </Link>
               </li>
-              <li>
+              <li className="flex items-center space-x-2">
+                {status === "authenticated" && session?.user?.image && (
+                  <Image
+                    src={session.user.image}
+                    alt="Profile"
+                    width={30}
+                    height={30}
+                    className="rounded-full"
+                  />
+                )}
                 <button
                   onClick={handleAuthAction}
                   className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
-                  {isAuthenticated ? "Logout" : "Login"}
+                  {status === "authenticated"
+                    ? `Logout (${firstName})`
+                    : "Login"}
                 </button>
               </li>
             </ul>

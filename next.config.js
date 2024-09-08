@@ -6,6 +6,7 @@ module.exports = {
       "m.media-amazon.com",
       "imagekit.io",
       "cdn.dummyjson.com",
+      "lh3.googleusercontent.com",
     ], // Add other domains as needed
   },
   env: {

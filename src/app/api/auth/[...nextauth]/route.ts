@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import User from "../../../../../models/user";
-import { connectToDB } from "../../../../../util/database";
+// import User from "../../../../../models/user";  // Commenting out the user model import
+// import { connectToDB } from "../../../../../util/database";  // Commenting out the database connection import
 
 // Define the auth options
 const authOptions = {
@@ -18,13 +18,13 @@ const authOptions = {
 
     async signIn({ account, profile, user, credentials }: any) {
       try {
-        await connectToDB();
+        // await connectToDB();  // Commenting out the database connection
 
-        const checkEmail = await User.find({ email: user?.email });
+        // const checkEmail = await User.find({ email: user?.email });  // Commenting out the email check
 
-        if (checkEmail.length === 0 && user?.email) {
-          await User.insertMany({ name: user.name, email: user.email });
-        }
+        // if (checkEmail.length === 0 && user?.email) {
+        //   await User.insertMany({ name: user.name, email: user.email });  // Commenting out the user creation
+        // }
         return true;
       } catch (error) {
         console.log(error);
