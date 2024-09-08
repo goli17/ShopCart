@@ -1,105 +1,68 @@
-import Image from "next/image";
+"use client";
+import React from "react";
 import Logo from "@/assets/icon.png";
-import Link from "next/link";
+import GoogleLogo from "@/assets/googleIcon.png";
+import { useRouter } from "next/navigation";
 
-export default function LoginComponent() {
+import Image from "next/image";
+import {
+  FaGoogle,
+  FaTwitter,
+  FaInstagram,
+  FaYoutube,
+  FaLinkedin,
+} from "react-icons/fa";
+import { useSession, signIn } from "next-auth/react";
+
+const LoginComponent = () => {
+  const { data: session } = useSession();
+  const router = useRouter();
+  if (session) {
+  }
+
   return (
-    <section className="flex justify-center items-center min-h-screen bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
-        <Link
-          href="#"
-          className="flex items-center mb-6 text-2xl font-semibold text-white"
+    <div className="flex items-center justify-center w-full h-full">
+      <div className="bg-white p-8 rounded-lg w-full  text-center">
+        <h1 className="flex items-center justify-center gap-2 text-3xl font-bold text-gray-900 mb-4">
+          Shopcart
+          <Image src={Logo} alt="Shopcart Logo" height={40} width={40} />
+        </h1>
+
+        <p className="text-gray-600 mb-8">Login to continue</p>
+
+        <button
+          onClick={() => {
+            signIn("google");
+          }}
+          className="w-full bg-white text-gray-700 border border-gray-300 hover:bg-gray-100 font-bold py-2 px-4 rounded flex items-center justify-center  gap-2 focus:outline-none focus:shadow-outline"
         >
-          <Image
-            src={Logo}
-            alt="logo"
-            width={100}
-            height={100}
-            className="w-8 h-8 mr-2"
-          />
-          ShopCart
-        </Link>
-        <div className="w-full  rounded-lg shadow dark:border sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-white">
-              Sign in to your account
-            </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-white"
-                >
-                  Your email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="name@company.com"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="remember"
-                      aria-describedby="remember"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                    />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label
-                      htmlFor="remember"
-                      className="text-gray-500 dark:text-gray-300"
-                    >
-                      Remember me
-                    </label>
-                  </div>
-                </div>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Forgot password?
-                </a>
-              </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                Sign in
-              </button>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don’t have an account yet?{" "}
-                <a
-                  href="#"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Sign up
-                </a>
-              </p>
-            </form>
-          </div>
+          <Image src={GoogleLogo} alt="Shopcart Logo" height={20} width={20} />
+          Login with Google
+        </button>
+
+        <div className="flex items-center my-6">
+          <div className="flex-grow border-t border-gray-300"></div>
+          <span className="mx-4 text-gray-500">or connect with</span>
+          <div className="flex-grow border-t border-gray-300"></div>
+        </div>
+
+        <div className="flex justify-center space-x-6">
+          <a href="#" className="text-blue-500 hover:text-blue-700">
+            <FaTwitter size={24} />
+          </a>
+          <a href="#" className="text-pink-500 hover:text-pink-700">
+            <FaInstagram size={24} />
+          </a>
+          <a href="#" className="text-red-500 hover:text-red-700">
+            <FaYoutube size={24} />
+          </a>
+          <a href="#" className="text-blue-700 hover:text-blue-900">
+            <FaLinkedin size={24} />
+          </a>
         </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default LoginComponent;

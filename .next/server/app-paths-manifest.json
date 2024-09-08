@@ -1,9 +1,4 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/pages/product/[id]/[[...params]]/page": "app/pages/product/[id]/[[...params]]/page.js",
-  "/pages/groceries/page": "app/pages/groceries/page.js",
-  "/page": "app/page.js",
-  "/pages/phones/page": "app/pages/phones/page.js",
-  "/pages/login/page": "app/pages/login/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/page": "app/page.js"
 }

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../axois";
-import { toastErrorMessage } from "@/util/toster-helper";
+import { toastErrorMessage } from "../../../util/toster-helper";
 
 export const getAllProduct = createAsyncThunk(
   "product/allproduts",
