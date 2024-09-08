@@ -98,8 +98,10 @@ export default function Navbar() {
 
           <div
             className={`${
-              isMenuOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
-            } overflow-hidden transition-all duration-300 ease-in-out w-full md:block md:w-auto`}
+              isMenuOpen
+                ? " max-md:max-h-[420px] max-md:opacity-100"
+                : " max-md:max-h-0 max-md:opacity-0"
+            } overflow-hidden w-full md:w-auto transition-all duration-300 ease-in-out md:transition-none md:duration-0 md:ease-in-out`}
             id="navbar-default"
           >
             <ul className="font-medium flex flex-col gap-10 p-4 md:p-0 mt-4 border  rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 text-white bg-gray-900">
@@ -153,7 +155,7 @@ export default function Navbar() {
                         alt="Profile"
                         width={30}
                         height={30}
-                        className="rounded-full"
+                        className="rounded-full pr-1"
                       />
                     )}
                     <button onClick={handleAuthAction} className="">

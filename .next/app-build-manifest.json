@@ -12,17 +12,10 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/pages/phones/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/pages/phones/page.css",
-      "static/chunks/app/pages/phones/page.js"
-    ],
-    "/pages/groceries/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/pages/groceries/page.css",
-      "static/chunks/app/pages/groceries/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }
