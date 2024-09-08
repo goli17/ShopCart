@@ -39,7 +39,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="sticky text-white bg-gray-900">
-        <div className="flex max-w-[1900px] flex-wrap items-center justify-between mx-auto p-4">
+        <div className="flex max-w-[1800px] flex-wrap items-center justify-between mx-auto p-4">
           <Link
             href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"

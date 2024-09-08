@@ -1,23 +1,31 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
-export default function ShoppingCart() {
+
+interface ShoppingCartProps {
+  item: {
+    imageUrl: string;
+    title: string;
+    price: number;
+    quantity: number;
+    onAddToFavorites: () => void;
+    onRemove: () => void;
+  };
+}
+
+export default function ShoppingCart({ item }: ShoppingCartProps) {
+  const { imageUrl, title, price, quantity, onAddToFavorites, onRemove } = item;
+
   return (
-    <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
+    <div className=" w-full flex-none lg:max-w-2xl xl:max-w-4xl">
       <div className="space-y-6">
-        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
+        <div className="rounded-lg border border-gray-200  p-4 shadow-sm dark:border-gray-700 bg-gray-800 md:p-6">
           <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
             <Link href="#" className="shrink-0 md:order-1">
               <Image
-                className="h-20 w-20 dark:hidden"
-                src=""
-                alt="imac image"
-                width={200}
-                height={200}
-              />
-              <Image
-                className="hidden h-20 w-20 dark:block"
-                src=""
-                alt="imac image"
+                className="h-20 w-20 object-contain "
+                src={imageUrl}
+                alt="Product image"
                 width={200}
                 height={200}
               />
@@ -43,9 +51,9 @@ export default function ShoppingCart() {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M1 1h16"
                     />
                   </svg>
@@ -56,7 +64,7 @@ export default function ShoppingCart() {
                   data-input-counter
                   className="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
                   placeholder=""
-                  value="2"
+                  value={quantity}
                   required
                 />
                 <button
@@ -74,9 +82,9 @@ export default function ShoppingCart() {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M9 1v16M1 9h16"
                     />
                   </svg>
@@ -84,7 +92,7 @@ export default function ShoppingCart() {
               </div>
               <div className="text-end md:order-4 md:w-32">
                 <p className="text-base font-bold text-gray-900 dark:text-white">
-                  $1,499
+                  ₹ {(price * 83.98).toFixed(2)}
                 </p>
               </div>
             </div>
@@ -94,14 +102,14 @@ export default function ShoppingCart() {
                 href="#"
                 className="text-base font-medium text-gray-900 hover:underline dark:text-white"
               >
-                PC system All in One APPLE iMac (2023) mqrq3ro/a, Apple M3, 24"
-                Retina 4.5K, 8GB, SSD 256GB, 10-core GPU, Keyboard layout INT
+                {title}
               </a>
 
               <div className="flex items-center gap-4">
                 <button
                   type="button"
                   className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white"
+                  onClick={onAddToFavorites}
                 >
                   <svg
                     className="me-1.5 h-5 w-5"
@@ -114,9 +122,9 @@ export default function ShoppingCart() {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
                     />
                   </svg>
@@ -126,6 +134,7 @@ export default function ShoppingCart() {
                 <button
                   type="button"
                   className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
+                  onClick={onRemove}
                 >
                   <svg
                     className="me-1.5 h-5 w-5"
@@ -138,9 +147,9 @@ export default function ShoppingCart() {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M6 18 17.94 6M18 18 6.06 6"
                     />
                   </svg>

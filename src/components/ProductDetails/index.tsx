@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/Lib/hooks";
 import { getAllProductSelector } from "@/Lib/SmartPhone/smartphone.selector";
 import { useEffect } from "react";
 import ProductCard from "../Cards/ProductCard";
+import { addToCart } from "@/Lib/cart/cartslice";
 
 export default function ProductDetails({ params }: any) {
   const dispatch = useAppDispatch();
@@ -25,6 +26,18 @@ export default function ProductDetails({ params }: any) {
     }, 300);
     return () => clearTimeout(debouncedDispatch);
   }, [dispatch, params.params.id]);
+  const handleAddToCart = () => {
+    if (product) {
+      const cartItem = {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product?.images,
+        quantity: 1,
+      };
+      dispatch(addToCart(cartItem));
+    }
+  };
 
   const { products } = useAppSelector(getAllProductSelector);
   const product = products?.find(
@@ -95,7 +108,7 @@ export default function ProductDetails({ params }: any) {
               </p>
               <button
                 className=" mt-4 w-full   inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={() => {}}
+                onClick={handleAddToCart}
               >
                 Add to Cart
               </button>

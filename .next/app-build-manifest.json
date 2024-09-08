@@ -11,23 +11,6 @@
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
-    ],
-    "/pages/phones/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/pages/phones/page.css",
-      "static/chunks/app/pages/phones/page.js"
-    ],
-    "/pages/cart/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/pages/cart/page.js"
-    ],
-    "/pages/product/[id]/[[...params]]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/pages/product/[id]/[[...params]]/page.css",
-      "static/chunks/app/pages/product/[id]/[[...params]]/page.js"
     ]
   }
 }

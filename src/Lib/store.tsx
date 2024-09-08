@@ -1,9 +1,11 @@
 import { AnyAction, configureStore, ThunkDispatch } from "@reduxjs/toolkit";
 import { persistStore } from "redux-persist";
 import productsReducer from "./SmartPhone/smartphone.slice";
+import cartReducer from "./cart/cartslice";
 export const store = configureStore({
   reducer: {
     products: productsReducer,
+    cart: cartReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

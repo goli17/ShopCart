@@ -1,6 +1,26 @@
-export default function PriceCard() {
+export default function PriceCard({ item }: any) {
+  const OriginalPrice = item.toFixed(2);
+  const Saving = (item - item * (1 - 0.1)).toFixed(2);
+  const shopcharge = (item - item * (1 - 0.001)).toFixed(2);
+  const tax = (item - item * (1 - 0.018)).toFixed(2);
+  const total = (
+    item +
+    parseFloat(shopcharge) +
+    parseFloat(tax) -
+    parseFloat(Saving)
+  ).toFixed(2);
+
+  const formatPrice = (price: string) =>
+    parseFloat(price)
+      .toLocaleString("en-IN", {
+        style: "currency",
+        currency: "INR",
+        minimumFractionDigits: 2,
+      })
+      .replace("₹", "");
+
   return (
-    <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
+    <div className=" w-full mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
       <div className="mx-auto mt-6 max-w-4xl flex-1 space-y-6 lg:mt-0 lg:w-full">
         <div className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
           <p className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -13,7 +33,7 @@ export default function PriceCard() {
                   Original price
                 </dt>
                 <dd className="text-base font-medium text-gray-900 dark:text-white">
-                  $7,592.00
+                  + ₹ {formatPrice(OriginalPrice)}
                 </dd>
               </dl>
 
@@ -22,7 +42,7 @@ export default function PriceCard() {
                   Savings
                 </dt>
                 <dd className="text-base font-medium text-green-600">
-                  -$299.00
+                  - ₹ {formatPrice(Saving)}
                 </dd>
               </dl>
 
@@ -31,7 +51,7 @@ export default function PriceCard() {
                   Store Pickup
                 </dt>
                 <dd className="text-base font-medium text-gray-900 dark:text-white">
-                  $99
+                  + ₹ {formatPrice(shopcharge)}
                 </dd>
               </dl>
 
@@ -40,7 +60,7 @@ export default function PriceCard() {
                   Tax
                 </dt>
                 <dd className="text-base font-medium text-gray-900 dark:text-white">
-                  $799
+                  + ₹ {formatPrice(tax)}
                 </dd>
               </dl>
             </div>
@@ -50,7 +70,7 @@ export default function PriceCard() {
                 Total
               </dt>
               <dd className="text-base font-bold text-gray-900 dark:text-white">
-                $8,191.00
+                ₹ {formatPrice(total)}
               </dd>
             </dl>
           </div>
