@@ -5,7 +5,7 @@ import Link from "next/link";
 import Logo from "@/assets/icon.png";
 import { useRouter, usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import LoginComponent from "../LoginComponent"; // Ensure this is a modal component
+import LoginComponent from "../LoginComponent";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,30 +49,53 @@ export default function Navbar() {
               ShopCart
             </span>
           </Link>
-          <button
-            onClick={toggleMenu}
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-default"
-            aria-expanded={isMenuOpen}
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
+          {status === "authenticated" ? (
+            <>
+              <p className="flex items-center space-x-2">
+                <button className=" py-2 px-3 flex  gap-2 items-center md:hidden  text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                  {status === "authenticated" ? `Hi ${firstName}` : "Login"}
+                  {status === "authenticated" && session?.user?.image && (
+                    <Image
+                      src={session.user.image}
+                      alt="Profile"
+                      width={30}
+                      height={30}
+                      className="rounded-full"
+                      onClick={toggleMenu}
+                    />
+                  )}
+                </button>
+              </p>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={toggleMenu}
+                type="button"
+                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-default"
+                aria-expanded={isMenuOpen}
+              >
+                <span className="sr-only">Open main menu</span>
+                <svg
+                  className="w-5 h-5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 17 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M1 1h15M1 7h15M1 13h15"
+                  />
+                </svg>
+              </button>
+            </>
+          )}
+
           <div
             className={`${
               isMenuOpen ? "block" : "hidden"
@@ -114,23 +137,32 @@ export default function Navbar() {
                 </Link>
               </li>
               <li className="flex items-center space-x-2">
-                {status === "authenticated" && session?.user?.image && (
-                  <Image
-                    src={session.user.image}
-                    alt="Profile"
-                    width={30}
-                    height={30}
-                    className="rounded-full"
-                  />
+                {isMenuOpen ? (
+                  <div className=" py-2 px-3 cursor-pointer">
+                    {status === "authenticated" ? `Logout` : "Login"}
+                  </div>
+                ) : (
+                  <>
+                    {" "}
+                    {status === "authenticated" && session?.user?.image && (
+                      <Image
+                        src={session.user.image}
+                        alt="Profile"
+                        width={30}
+                        height={30}
+                        className="rounded-full"
+                      />
+                    )}
+                    <button
+                      onClick={handleAuthAction}
+                      className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    >
+                      {status === "authenticated"
+                        ? `Hii ${firstName}`
+                        : "Login"}
+                    </button>
+                  </>
                 )}
-                <button
-                  onClick={handleAuthAction}
-                  className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  {status === "authenticated"
-                    ? `Logout (${firstName})`
-                    : "Login"}
-                </button>
               </li>
             </ul>
           </div>
