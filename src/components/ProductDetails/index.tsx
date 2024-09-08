@@ -134,6 +134,9 @@ export default function ProductDetails({ params }: any) {
                 {products &&
                   products
                     .slice(0, 5)
+                    .filter(
+                      (prod: any) => prod.id !== Number(params?.params?.id)
+                    )
                     ?.map((product: any) => (
                       <ProductCard
                         key={product.id}
