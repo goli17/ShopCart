@@ -56,7 +56,7 @@ export default function Navbar() {
                   {status === "authenticated" ? `Hi ${firstName}` : "Login"}
                   {status === "authenticated" && session?.user?.image && (
                     <Image
-                      src={session.user.image}
+                      src={session?.user?.image}
                       alt="Profile"
                       width={30}
                       height={30}
@@ -132,7 +132,7 @@ export default function Navbar() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/pages/cart"
                   className="block py-2 px-3 text-white rounded   md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
                 >
                   Cart
