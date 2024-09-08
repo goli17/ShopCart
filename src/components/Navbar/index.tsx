@@ -45,14 +45,14 @@ export default function Navbar() {
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <Image src={Logo} alt="Logo" width={50} height={50} />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center text-2xl font-semibold whitespace-nowrap">
               ShopCart
             </span>
           </Link>
           {status === "authenticated" ? (
             <>
               <p className="flex items-center space-x-2">
-                <button className=" py-2 px-3 flex  gap-2 items-center md:hidden  text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                <button className=" py-2 px-3 flex  gap-2 items-center md:hidden  ">
                   {status === "authenticated" ? `Hi ${firstName}` : "Login"}
                   {status === "authenticated" && session?.user?.image && (
                     <Image
@@ -72,7 +72,7 @@ export default function Navbar() {
               <button
                 onClick={toggleMenu}
                 type="button"
-                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2  hover:bg-gray-700 focus:ring-gray-600"
                 aria-controls="navbar-default"
                 aria-expanded={isMenuOpen}
               >
@@ -98,15 +98,15 @@ export default function Navbar() {
 
           <div
             className={`${
-              isMenuOpen ? "block" : "hidden"
-            } w-full md:block md:w-auto`}
+              isMenuOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
+            } overflow-hidden transition-all duration-300 ease-in-out w-full md:block md:w-auto`}
             id="navbar-default"
           >
-            <ul className="font-medium flex flex-col gap-10 p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 text-white bg-gray-900 dark:border-gray-700">
+            <ul className="font-medium flex flex-col gap-10 p-4 md:p-0 mt-4 border  rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 text-white bg-gray-900">
               <li>
                 <Link
                   href="/"
-                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                  className="block py-2 px-3 text-white rounded  md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700"
                   aria-current="page"
                 >
                   Home
@@ -115,7 +115,7 @@ export default function Navbar() {
               <li>
                 <Link
                   href="/pages/phones"
-                  className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  className="block py-2 px-3 text-white rounded  md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 "
                 >
                   SmartPhones
                 </Link>
@@ -123,7 +123,7 @@ export default function Navbar() {
               <li>
                 <Link
                   href="/pages/groceries"
-                  className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  className="block py-2 px-3 text-white rounded   md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
                 >
                   Daily Products
                 </Link>
@@ -131,14 +131,17 @@ export default function Navbar() {
               <li>
                 <Link
                   href="#"
-                  className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  className="block py-2 px-3 text-white rounded   md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
                 >
                   Cart
                 </Link>
               </li>
-              <li className="flex items-center space-x-2">
+              <li className="flex items-center ">
                 {isMenuOpen ? (
-                  <div className=" py-2 px-3 cursor-pointer">
+                  <div
+                    onClick={handleAuthAction}
+                    className=" w-full py-2 px-3 cursor-pointer block  text-white rounded   md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
+                  >
                     {status === "authenticated" ? `Logout` : "Login"}
                   </div>
                 ) : (
@@ -153,13 +156,8 @@ export default function Navbar() {
                         className="rounded-full"
                       />
                     )}
-                    <button
-                      onClick={handleAuthAction}
-                      className="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                    >
-                      {status === "authenticated"
-                        ? `Hii ${firstName}`
-                        : "Login"}
+                    <button onClick={handleAuthAction} className="">
+                      {status === "authenticated" ? `Hi ${firstName}` : "Login"}
                     </button>
                   </>
                 )}
