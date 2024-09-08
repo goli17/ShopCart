@@ -1,10 +1,10 @@
-import NextAuth, { AuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { NextApiHandler } from "next";
 import User from "../../../../../models/user";
 import { connectToDB } from "../../../../../util/database";
 
-const authOptions: AuthOptions = {
+// Define the auth options
+const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID as string,
@@ -12,11 +12,11 @@ const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async session({ session, token, user }) {
+    async session({ session, token, user }: any) {
       return session;
     },
 
-    async signIn({ account, profile, user, credentials }) {
+    async signIn({ account, profile, user, credentials }: any) {
       try {
         await connectToDB();
 
@@ -34,6 +34,6 @@ const authOptions: AuthOptions = {
   },
 };
 
-const handler: NextApiHandler = (req, res) => NextAuth(req, res, authOptions);
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
