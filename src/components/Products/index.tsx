@@ -23,6 +23,7 @@ export default function Products() {
               price={product.price}
               brand={product.brand}
               id={product.id}
+              category={product?.category}
             />
           </div>
         ))}

@@ -23,6 +23,7 @@ export default function GroceriesComponent() {
               price={product.price}
               brand={product.brand}
               id={product.id}
+              category={undefined}
             />
           </div>
         ))}

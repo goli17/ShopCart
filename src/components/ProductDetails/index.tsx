@@ -33,6 +33,7 @@ export default function ProductDetails({ params }: any) {
         title: product.title,
         price: product.price,
         image: product?.images,
+        discription: product?.description,
         quantity: 1,
       };
       dispatch(addToCart(cartItem));
@@ -159,6 +160,7 @@ export default function ProductDetails({ params }: any) {
                         price={product.price}
                         brand={product.brand}
                         id={product.id}
+                        category={product?.category}
                       />
                     ))}
               </div>

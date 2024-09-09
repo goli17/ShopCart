@@ -14,7 +14,7 @@ export default function Phone() {
   return (
     <div className="flex flex-wrap items-center justify-center p-2 gap-2 max-sm:grid max-sm:grid-cols-2">
       {products &&
-        products?.map((product: any) => (
+        products?.slice(0, 15).map((product: any) => (
           <div key={product.id} className="flex flex-wrap">
             <ProductCard
               image={product.images[0]}
@@ -23,6 +23,7 @@ export default function Phone() {
               price={product.price}
               brand={product.brand}
               id={product.id}
+              category={undefined}
             />
           </div>
         ))}

@@ -18,8 +18,16 @@ export default function HomePage(params: any) {
     dispatch(getAllProduct());
   }, [dispatch]);
 
-  const { products } = useAppSelector(getAllProductSelector);
+  const { products = [] } = useAppSelector(getAllProductSelector);
 
+  function shuffleArray(array: any[]) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+  const shuffledProducts = shuffleArray([...products]);
   return (
     <div className="flex flex-col gap-1 pb-3 relative">
       <div className="relative w-full">
@@ -53,8 +61,8 @@ export default function HomePage(params: any) {
           <h1 className="text-[40px] text-white font-bold px-4">Sale</h1>
           <hr className="text-white p-2 h-2 w-full"></hr>
           <div className=" w-full flex pb-5 flex-row flex-wrap  max-md:grid max-md:grid-cols-2 items-center justify-center gap-4">
-            {products &&
-              products
+            {shuffledProducts.length > 0 ? (
+              shuffledProducts
                 .slice(0, 4)
                 ?.map((product: any) => (
                   <ProductCard
@@ -65,8 +73,12 @@ export default function HomePage(params: any) {
                     price={product.price}
                     brand={product.brand}
                     id={product.id}
+                    category={product?.category}
                   />
-                ))}
+                ))
+            ) : (
+              <p className="text-white">Loading...</p>
+            )}
           </div>
         </div>
       </div>

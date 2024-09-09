@@ -6,6 +6,7 @@ interface ShoppingCartProps {
   item: {
     imageUrl: string;
     title: string;
+    discription: string;
     price: number;
     quantity: number;
     onAddToFavorites: () => void;
@@ -14,16 +15,24 @@ interface ShoppingCartProps {
 }
 
 export default function ShoppingCart({ item }: ShoppingCartProps) {
-  const { imageUrl, title, price, quantity, onAddToFavorites, onRemove } = item;
+  const {
+    imageUrl,
+    discription,
+    title,
+    price,
+    quantity,
+    onAddToFavorites,
+    onRemove,
+  } = item;
 
   return (
-    <div className=" w-full flex-none lg:max-w-2xl xl:max-w-4xl">
+    <div className="w-full flex-none lg:max-w-2xl xl:max-w-4xl">
       <div className="space-y-6">
-        <div className="rounded-lg border border-gray-200  p-4 shadow-sm dark:border-gray-700 bg-gray-800 md:p-6">
+        <div className="rounded-lg border border-gray-200 p-4 shadow-sm bg-white md:p-6">
           <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
             <Link href="#" className="shrink-0 md:order-1">
               <Image
-                className="h-20 w-20 object-contain "
+                className="h-20 w-20 object-contain"
                 src={imageUrl}
                 alt="Product image"
                 width={200}
@@ -40,10 +49,10 @@ export default function ShoppingCart({ item }: ShoppingCartProps) {
                   type="button"
                   id="decrement-button"
                   data-input-counter-decrement="counter-input"
-                  className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+                  className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-100"
                 >
                   <svg
-                    className="h-2.5 w-2.5 text-gray-900 dark:text-white"
+                    className="h-2.5 w-2.5 text-black"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -62,7 +71,7 @@ export default function ShoppingCart({ item }: ShoppingCartProps) {
                   type="text"
                   id="counter-input"
                   data-input-counter
-                  className="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 dark:text-white"
+                  className="w-10 shrink-0 border-0 bg-transparent text-center text-sm font-medium text-black focus:outline-none focus:ring-0"
                   placeholder=""
                   value={quantity}
                   required
@@ -71,10 +80,10 @@ export default function ShoppingCart({ item }: ShoppingCartProps) {
                   type="button"
                   id="increment-button"
                   data-input-counter-increment="counter-input"
-                  className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+                  className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100"
                 >
                   <svg
-                    className="h-2.5 w-2.5 text-gray-900 dark:text-white"
+                    className="h-2.5 w-2.5 text-black"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -91,24 +100,21 @@ export default function ShoppingCart({ item }: ShoppingCartProps) {
                 </button>
               </div>
               <div className="text-end md:order-4 md:w-32">
-                <p className="text-base font-bold text-gray-900 dark:text-white">
-                  ₹ {(price * 83.98).toFixed(2)}
+                <p className="text-base font-bold text-black">
+                  ₹ {Number((price * 83.98).toFixed(2)).toLocaleString()}
                 </p>
               </div>
             </div>
 
-            <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-              <a
-                href="#"
-                className="text-base font-medium text-gray-900 hover:underline dark:text-white"
-              >
+            <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md cursor-pointer">
+              <p className="text-base font-medium text-black hover:underline">
                 {title}
-              </a>
-
+              </p>
+              <p className="text-gray-400 line-clamp-3">{discription}</p>
               <div className="flex items-center gap-4">
                 <button
                   type="button"
-                  className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline dark:text-gray-400 dark:hover:text-white"
+                  className="inline-flex items-center text-sm font-medium text-gray-500"
                   onClick={onAddToFavorites}
                 >
                   <svg
@@ -133,7 +139,7 @@ export default function ShoppingCart({ item }: ShoppingCartProps) {
 
                 <button
                   type="button"
-                  className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
+                  className="inline-flex items-center text-sm font-medium text-red-600 hover:underline"
                   onClick={onRemove}
                 >
                   <svg
