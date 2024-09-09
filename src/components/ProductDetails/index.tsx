@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import "./ProductDetails.scss";
 import {
   getAllProduct,
   getGroceries,
@@ -7,51 +8,70 @@ import {
 } from "@/Lib/SmartPhone/smartphone.actions";
 import { useAppDispatch, useAppSelector } from "@/Lib/hooks";
 import { getAllProductSelector } from "@/Lib/SmartPhone/smartphone.selector";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "../Cards/ProductCard";
-import { addToCart } from "@/Lib/cart/cartslice";
+import { addToCart, removeFromCart } from "@/Lib/cart/cartslice";
+import { getCartItemsSelector } from "@/Lib/cart/cartSelector";
+import { getSession } from "next-auth/react"; // Import to check session
+import LoginComponent from "../LoginComponent";
+import { describe } from "node:test";
 
 export default function ProductDetails({ params }: any) {
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const debouncedDispatch = setTimeout(() => {
-      if (params.params.id < 16) {
-        dispatch(getAllProduct());
-      } else if (params.params.id >= 16 && params.params.id < 46) {
-        dispatch(getGroceries());
-      } else {
-        dispatch(getSmartPhone());
-      }
-    }, 300);
-    return () => clearTimeout(debouncedDispatch);
-  }, [dispatch, params.params.id]);
-  const handleAddToCart = () => {
-    if (product) {
-      const cartItem = {
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        image: product?.images,
-        discription: product?.description,
-        quantity: 1,
-      };
-      dispatch(addToCart(cartItem));
-    }
-  };
+  const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { products } = useAppSelector(getAllProductSelector);
+  const cartItems = useAppSelector(getCartItemsSelector);
+
   const product = products?.find(
     (product: any) => product.id === Number(params.params.id)
   );
 
+  const isInCart = cartItems.some((item: any) => item.id === product?.id);
+
+  const handleAddToCart = async () => {
+    setLoading(true);
+
+    const session = await getSession(); // Check if the user is logged in
+
+    if (!session) {
+      setIsModalOpen(true);
+      setLoading(false);
+      return;
+    }
+
+    setTimeout(() => {
+      if (product) {
+        const cartItem = {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          image: product?.images,
+          description: product?.description,
+          quantity: 1,
+        };
+
+        if (isInCart) {
+          dispatch(removeFromCart(product.id));
+        } else {
+          dispatch(addToCart(cartItem));
+        }
+      }
+      setLoading(false);
+    }, 1000);
+  };
+  console.log(cartItems);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       {product ? (
-        <div className="flex flex-col w-full  gap-8 p-5 max-md:p-0">
+        <div className="flex flex-col w-full gap-8 p-5 max-md:p-0">
           {/* Section 1: Product Image */}
-          <div className="flex flex-col gap-8  md:flex-row  p-5">
-            <div className="flex-1 flex flex-col gap-5  justify-center items-start">
+          <div className="flex flex-col gap-8 md:flex-row p-5">
+            <div className="flex-1 flex flex-col gap-5 justify-center items-start">
               <Image
                 src={product.thumbnail}
                 alt={product.title}
@@ -59,7 +79,7 @@ export default function ProductDetails({ params }: any) {
                 height={400}
                 className="object-contain border-2"
               />
-              <p className="w-full  flex items-center gap-2 ">
+              <p className="w-full flex items-center gap-2">
                 {product.images
                   .slice(1, 3)
                   .map((image: string, index: number) => (
@@ -68,8 +88,8 @@ export default function ProductDetails({ params }: any) {
                       src={image}
                       alt={product.title}
                       width={150}
-                      height={150} // Fixed height for consistency
-                      className="object-contain border-2 w-[200px] h-[200px]  overflow-hidden"
+                      height={150}
+                      className="object-contain border-2 w-[200px] h-[200px] overflow-hidden"
                     />
                   ))}
               </p>
@@ -108,10 +128,23 @@ export default function ProductDetails({ params }: any) {
                 Rating: {product.rating.toFixed(0)}+
               </p>
               <button
-                className=" mt-4 w-full   inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className={`mt-4 w-full inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:outline-none ${
+                  loading
+                    ? "bg-blue-700"
+                    : isInCart
+                    ? "bg-green-500 hover:bg-green-600"
+                    : "bg-blue-700 hover:bg-blue-800"
+                }`}
                 onClick={handleAddToCart}
+                disabled={loading}
               >
-                Add to Cart
+                {loading ? (
+                  <div className="loader"></div>
+                ) : isInCart ? (
+                  "Remove from Cart"
+                ) : (
+                  "Add to Cart"
+                )}
               </button>
             </div>
 
@@ -138,13 +171,13 @@ export default function ProductDetails({ params }: any) {
               )}
             </div>
           </div>
-          <div className="text-[25px] w-full  m-auto  flex flex-col gap-1">
+          <div className="text-[25px] w-full m-auto flex flex-col gap-1">
             <div className="w-full flex flex-wrap py-[100px] bg-gray-900 px-1">
               <h1 className="text-[40px] text-white font-bold px-4">
                 Similar Products
               </h1>
               <hr className="text-white p-2 h-2 w-full"></hr>
-              <div className=" w-full flex pb-5 flex-row flex-wrap  max-md:grid max-md:grid-cols-2 items-center justify-center gap-4">
+              <div className="w-full flex pb-5 flex-row flex-wrap max-md:grid max-md:grid-cols-2 items-center justify-center gap-4">
                 {products &&
                   products
                     .slice(0, 5)
@@ -165,6 +198,34 @@ export default function ProductDetails({ params }: any) {
                     ))}
               </div>
             </div>
+          </div>
+          <div>
+            {isModalOpen && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="bg-white rounded-lg shadow-lg p-6 m-2 relative flex items-center justify-center max-w-[500px] max-h-[400px] w-full h-full">
+                  <button
+                    onClick={closeModal}
+                    className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                  <LoginComponent />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       ) : (

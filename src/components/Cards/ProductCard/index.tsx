@@ -42,7 +42,7 @@ export default function ProductCard({
         <p className="text-[15px] font-normal text-gray-700 dark:text-gray-900">
           {category?.toUpperCase()}
         </p>
-        <p className="text-[15px] font-normal text-gray-700 dark:text-gray-400 h-[50px] overflow-hidden text-ellipsis line-clamp-2">
+        <p className="text-[15px] font-normal text-gray-700 dark:text-gray-400 h-[47px] overflow-hidden text-ellipsis line-clamp-2">
           {description}
         </p>
         <p className="text-[18px] font-bold">

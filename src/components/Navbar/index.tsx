@@ -36,6 +36,10 @@ export default function Navbar() {
 
   const firstName = session?.user?.name?.split(" ")[0]; // Extract first name from session
 
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <>
       <nav className="sticky text-white bg-gray-900">
@@ -43,6 +47,7 @@ export default function Navbar() {
           <Link
             href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
+            onClick={handleLinkClick} // Close menu on logo click
           >
             <Image src={Logo} alt="Logo" width={50} height={50} />
             <span className="self-center text-2xl font-semibold whitespace-nowrap">
@@ -52,7 +57,7 @@ export default function Navbar() {
           {status === "authenticated" ? (
             <>
               <p className="flex items-center space-x-2">
-                <button className=" py-2 px-3 flex  gap-2 items-center md:hidden  ">
+                <button className="py-2 px-3 flex gap-2 items-center md:hidden">
                   {status === "authenticated" ? `Hi ${firstName}` : "Login"}
                   {status === "authenticated" && session?.user?.image && (
                     <Image
@@ -72,7 +77,7 @@ export default function Navbar() {
               <button
                 onClick={toggleMenu}
                 type="button"
-                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2  hover:bg-gray-700 focus:ring-gray-600"
+                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:outline-none focus:ring-2 hover:bg-gray-700 focus:ring-gray-600"
                 aria-controls="navbar-default"
                 aria-expanded={isMenuOpen}
               >
@@ -99,17 +104,18 @@ export default function Navbar() {
           <div
             className={`${
               isMenuOpen
-                ? " max-md:max-h-[420px] max-md:opacity-100"
-                : " max-md:max-h-0 max-md:opacity-0"
+                ? "max-md:max-h-[420px] max-md:opacity-100"
+                : "max-md:max-h-0 max-md:opacity-0"
             } overflow-hidden w-full md:w-auto transition-all duration-300 ease-in-out md:transition-none md:duration-0 md:ease-in-out`}
             id="navbar-default"
           >
-            <ul className="font-medium flex flex-col gap-10 p-4 md:p-0 mt-4 border  rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 text-white bg-gray-900">
+            <ul className="font-medium flex flex-col gap-10 p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 text-white bg-gray-900">
               <li>
                 <Link
                   href="/"
-                  className="block py-2 px-3 text-white rounded  md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700"
+                  className="block py-2 px-3 text-white rounded md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700"
                   aria-current="page"
+                  onClick={handleLinkClick} // Close menu on link click
                 >
                   Home
                 </Link>
@@ -117,7 +123,8 @@ export default function Navbar() {
               <li>
                 <Link
                   href="/pages/phones"
-                  className="block py-2 px-3 text-white rounded  md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 "
+                  className="block py-2 px-3 text-white rounded md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700"
+                  onClick={handleLinkClick} // Close menu on link click
                 >
                   SmartPhones
                 </Link>
@@ -125,7 +132,8 @@ export default function Navbar() {
               <li>
                 <Link
                   href="/pages/groceries"
-                  className="block py-2 px-3 text-white rounded   md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
+                  className="block py-2 px-3 text-white rounded md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
+                  onClick={handleLinkClick} // Close menu on link click
                 >
                   Daily Products
                 </Link>
@@ -133,22 +141,26 @@ export default function Navbar() {
               <li>
                 <Link
                   href="/pages/cart"
-                  className="block py-2 px-3 text-white rounded   md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
+                  className="block py-2 px-3 text-white rounded md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
+                  onClick={handleLinkClick} // Close menu on link click
                 >
+                  {}
                   Cart
                 </Link>
               </li>
-              <li className="flex items-center ">
+              <li className="flex items-center">
                 {isMenuOpen ? (
                   <div
-                    onClick={handleAuthAction}
-                    className=" w-full py-2 px-3 cursor-pointer block  text-white rounded   md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
+                    onClick={() => {
+                      handleAuthAction();
+                      handleLinkClick(); // Close menu on auth action
+                    }}
+                    className="w-full py-2 px-3 cursor-pointer block text-white rounded md:border-0 md:hover:text-blue-700 md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
                   >
                     {status === "authenticated" ? `Logout` : "Login"}
                   </div>
                 ) : (
                   <>
-                    {" "}
                     {status === "authenticated" && session?.user?.image && (
                       <Image
                         src={session.user.image}
@@ -158,7 +170,13 @@ export default function Navbar() {
                         className="rounded-full pr-1"
                       />
                     )}
-                    <button onClick={handleAuthAction} className="">
+                    <button
+                      onClick={() => {
+                        handleAuthAction();
+                        handleLinkClick(); // Close menu on auth action
+                      }}
+                      className=""
+                    >
                       {status === "authenticated" ? `Hi ${firstName}` : "Login"}
                     </button>
                   </>

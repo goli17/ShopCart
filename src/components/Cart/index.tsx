@@ -1,12 +1,13 @@
 "use client";
 import PriceCard from "../Cards/PriceCard";
-import ShoppingCart from "../Cards/ShoppingCart";
+import ShoppingCart from "../Cards/ShoppingCard";
 import { RootState } from "@/Lib/store";
 import { useAppDispatch, useAppSelector } from "@/Lib/hooks";
 import { getAllProductSelector } from "@/Lib/SmartPhone/smartphone.selector";
 import { getAllProduct } from "@/Lib/SmartPhone/smartphone.actions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "../Cards/ProductCard";
+import { removeFromCart, updateQuantity } from "@/Lib/cart/cartslice";
 
 function shuffleArray(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -20,6 +21,7 @@ export default function CartComponent() {
   const { products = [] } = useAppSelector(getAllProductSelector); // Default to an empty array
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state: RootState) => state.cart.items);
+  const [shuffledProducts, setShuffledProducts] = useState([...products]);
 
   useEffect(() => {
     const debouncedDispatch = setTimeout(() => {
@@ -28,12 +30,23 @@ export default function CartComponent() {
     return () => clearTimeout(debouncedDispatch);
   }, [dispatch]);
 
+  useEffect(() => {
+    setShuffledProducts(shuffleArray([...products]));
+
+    const shuffleProducts = () => {
+      setShuffledProducts(shuffleArray([...products]));
+      setTimeout(shuffleProducts, 5000);
+    };
+
+    const shuffleTimeout = setTimeout(shuffleProducts, 30000);
+
+    return () => clearTimeout(shuffleTimeout);
+  }, [products]);
+
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * (item.quantity || 1),
     0
   );
-
-  const shuffledProducts = shuffleArray([...products]);
 
   return (
     <>
@@ -51,14 +64,19 @@ export default function CartComponent() {
                       imageUrl: product?.image[0],
                       title: product?.title,
                       price: product?.price,
-                      discription: product?.discription,
-                      quantity: 1,
+                      description: product?.description,
+                      quantity: product.quantity,
                       onAddToFavorites: function (): void {
-                        throw new Error("Function not implemented.");
+                        ("Function not implemented.");
                       },
-                      onRemove: function (): void {
-                        throw new Error("Function not implemented.");
-                      },
+                      onRemove: () => dispatch(removeFromCart(product.id)),
+                      onUpdateQuantity: (newQuantity) =>
+                        dispatch(
+                          updateQuantity({
+                            id: product.id,
+                            quantity: newQuantity,
+                          })
+                        ),
                     }}
                   />
                 </div>
