@@ -4,7 +4,7 @@ import CheckIcon from "@/assets/check";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
-export default function SuccessPage() {
+export default function Success() {
   const router = useRouter();
 
   useEffect(() => {
