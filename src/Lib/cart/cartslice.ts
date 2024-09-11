@@ -11,10 +11,14 @@ interface CartItem {
 
 interface CartState {
   items: CartItem[];
+  amount: number;
+  order_id: string;
 }
 
 const initialState: CartState = {
   items: [],
+  amount: 0,
+  order_id: "",
 };
 
 const cartSlice = createSlice({
@@ -36,8 +40,20 @@ const cartSlice = createSlice({
         item.quantity = action.payload.quantity;
       }
     },
+    setAmount: (state, action: PayloadAction<number>) => {
+      state.amount = action.payload;
+    },
+    setOrderId: (state, action: PayloadAction<string>) => {
+      state.order_id = action.payload;
+    },
   },
 });
 
-export const { addToCart, removeFromCart, updateQuantity } = cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  updateQuantity,
+  setAmount,
+  setOrderId,
+} = cartSlice.actions;
 export default cartSlice.reducer;

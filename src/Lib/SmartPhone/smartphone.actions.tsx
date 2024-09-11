@@ -28,7 +28,7 @@ export const getProductById = createAsyncThunk(
   }
 );
 export const getSmartPhone = createAsyncThunk(
-  "product/getById",
+  "product/getSmartPhones",
   async (_, thunkApi) => {
     try {
       const response = await axiosInstance.get(
@@ -43,7 +43,7 @@ export const getSmartPhone = createAsyncThunk(
 );
 
 export const getGroceries = createAsyncThunk(
-  "product/getById",
+  "product/getGroceries",
   async (_, thunkApi) => {
     try {
       const response = await axiosInstance.get(`/products/category/groceries`);

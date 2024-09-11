@@ -12,6 +12,18 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
+    "/pages/groceries/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/pages/groceries/page.css",
+      "static/chunks/app/pages/groceries/page.js"
+    ],
+    "/pages/phones/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/pages/phones/page.css",
+      "static/chunks/app/pages/phones/page.js"
+    ],
     "/pages/product/[id]/[[...params]]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -23,6 +35,12 @@
       "static/chunks/main-app.js",
       "static/css/app/pages/cart/page.css",
       "static/chunks/app/pages/cart/page.js"
+    ],
+    "/pages/products/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/pages/products/page.css",
+      "static/chunks/app/pages/products/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",

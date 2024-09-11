@@ -3,6 +3,7 @@ import {
   getAllProduct,
   getProductById,
   getSmartPhone,
+  getGroceries,
 } from "./smartphone.actions";
 
 interface Dimensions {
@@ -51,7 +52,7 @@ interface Product {
 
 export type ProductsState = {
   products: Product[];
-  product: Product[];
+  selectedProduct: Product | null;
   total: number;
   skip: number;
   limit: number;
@@ -59,7 +60,7 @@ export type ProductsState = {
 
 const initialState: ProductsState = {
   products: [],
-  product: [],
+  selectedProduct: null,
   total: 0,
   skip: 0,
   limit: 30,
@@ -67,23 +68,30 @@ const initialState: ProductsState = {
 
 const productsSlice = createSlice({
   name: "products",
-  initialState: {
-    allProducts: [] as Product[],
-    Product: [] as Product[],
-    productLoading: false,
-  } as unknown as ProductsState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllProduct.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.products = action.payload.products;
-      }
-    });
-    builder.addCase(getProductById.fulfilled, (state, action) => {
-      if (action.payload) {
-        state.products = action.payload.products;
-      }
-    });
+    builder
+      .addCase(getAllProduct.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.products = action.payload.products;
+        }
+      })
+      .addCase(getProductById.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.selectedProduct = action.payload;
+        }
+      })
+      .addCase(getSmartPhone.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.products = action.payload.products;
+        }
+      })
+      .addCase(getGroceries.fulfilled, (state, action) => {
+        if (action.payload) {
+          state.products = action.payload.products;
+        }
+      });
   },
 });
 

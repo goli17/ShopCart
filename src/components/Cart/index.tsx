@@ -8,6 +8,8 @@ import { getAllProduct } from "@/Lib/SmartPhone/smartphone.actions";
 import { useEffect, useState } from "react";
 import ProductCard from "../Cards/ProductCard";
 import { removeFromCart, updateQuantity } from "@/Lib/cart/cartslice";
+import { TbMoodEmpty } from "react-icons/tb";
+import { useRouter } from "next/navigation";
 
 function shuffleArray(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -18,6 +20,7 @@ function shuffleArray(array: any[]) {
 }
 
 export default function CartComponent() {
+  const router = useRouter();
   const { products = [] } = useAppSelector(getAllProductSelector); // Default to an empty array
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state: RootState) => state.cart.items);
@@ -57,31 +60,48 @@ export default function CartComponent() {
               <h2 className="text-xl font-semibold text-gray-900 sm:text-2xl">
                 Shopping Cart
               </h2>
-              {cartItems?.map((product: any) => (
-                <div key={product.id} className="w-full">
-                  <ShoppingCart
-                    item={{
-                      imageUrl: product?.image[0],
-                      title: product?.title,
-                      price: product?.price,
-                      description: product?.description,
-                      quantity: product.quantity,
-                      onAddToFavorites: function (): void {
-                        ("Function not implemented.");
-                      },
-                      onRemove: () => dispatch(removeFromCart(product.id)),
-                      onUpdateQuantity: (newQuantity) =>
-                        dispatch(
-                          updateQuantity({
-                            id: product.id,
-                            quantity: newQuantity,
-                          })
-                        ),
-                    }}
-                  />
+              {cartItems?.length === 0 ? (
+                <div className="flex flex-col items-center justify-center w-full h-full py-20">
+                  <TbMoodEmpty className="text-[200px] text-gray-200" />
+                  <div className="text-center text-gray-500 mt-4">
+                    No Products Selected
+                  </div>
+                  <button
+                    className="flex w-full max-w-[400px] items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    onClick={() => router.push("/pages/products")}
+                  >
+                    View More Products
+                  </button>
                 </div>
-              ))}
+              ) : (
+                cartItems.map((product: any) => (
+                  <div key={product.id} className="w-full">
+                    <ShoppingCart
+                      item={{
+                        id: product?.id,
+                        imageUrl: product?.image[0],
+                        title: product?.title,
+                        price: product?.price,
+                        description: product?.description,
+                        quantity: product.quantity,
+                        onAddToFavorites: function (): void {
+                          // Function not implemented.
+                        },
+                        onRemove: () => dispatch(removeFromCart(product.id)),
+                        onUpdateQuantity: (newQuantity) =>
+                          dispatch(
+                            updateQuantity({
+                              id: product.id,
+                              quantity: newQuantity,
+                            })
+                          ),
+                      }}
+                    />
+                  </div>
+                ))
+              )}
             </div>
+
             <div className="w-full md:w-1/4 md:flex md:justify-end">
               <PriceCard item={totalPrice * 83.98} />
             </div>

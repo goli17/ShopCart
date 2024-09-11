@@ -11,6 +11,7 @@ export default function Products() {
   }, [dispatch]);
 
   const { products } = useAppSelector(getAllProductSelector);
+
   return (
     <div className="flex flex-wrap items-center justify-center p-2 gap-2 max-sm:grid max-sm:grid-cols-2">
       {products &&

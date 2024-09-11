@@ -2,9 +2,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface ShoppingCartProps {
   item: {
+    id: any;
     imageUrl: string;
     title: string;
     description: any;
@@ -18,6 +20,7 @@ interface ShoppingCartProps {
 
 export default function ShoppingCart({ item }: ShoppingCartProps) {
   const {
+    id,
     imageUrl,
     description,
     title,
@@ -49,13 +52,13 @@ export default function ShoppingCart({ item }: ShoppingCartProps) {
     });
   };
   const totalPrice = (price * itemQuantity * 83.98).toFixed(2);
-
+  const router = useRouter();
   return (
     <div className="w-full flex-none lg:max-w-2xl xl:max-w-4xl">
       <div className="space-y-6">
         <div className="rounded-lg border border-gray-200 p-4 shadow-sm bg-white md:p-6">
           <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-            <Link href="#" className="shrink-0 md:order-1">
+            <Link href={`/pages/product/${id}`} className="shrink-0 md:order-1">
               <Image
                 className="h-20 w-20 object-contain"
                 src={imageUrl}
