@@ -22,7 +22,7 @@ const PaymentGateway = () => {
       order_id: "",
       handler: function (response: any) {
         console.log(response, "payment response");
-        router.push("/success");
+        router.push("/");
       },
       notes: {
         address: "Razorpay Corporate Office",
