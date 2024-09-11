@@ -4,15 +4,7 @@ import { setAmount, setOrderId } from "@/Lib/cart/cartslice"; // Example actions
 import PaymentGateway from "@/components/payment"; // Adjust the import path as needed
 import Link from "next/link";
 import "./PriceCard.scss";
-export default function PriceCard({
-  item,
-  amount,
-  order_id,
-}: {
-  item: number;
-  amount: number;
-  order_id: string;
-}) {
+export default function PriceCard({ item }: { item: number }) {
   const [isPaymentOpen, setIsPaymentOpen] = useState(false); // State to control PaymentGateway display
   const OriginalPrice = item.toFixed(2);
   const Saving = (item - item * (1 - 0.1)).toFixed(2);
@@ -33,7 +25,7 @@ export default function PriceCard({
         minimumFractionDigits: 2,
       })
       .replace("₹", "");
-
+  const order_id = "1";
   // Optional: Dispatch actions to update Redux store
   const dispatch = useDispatch();
   dispatch(setAmount(Number(total)));
