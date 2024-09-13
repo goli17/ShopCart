@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-// import User from "../../../../../models/user";  // Commenting out the user model import
-// import { connectToDB } from "../../../../../util/database";  // Commenting out the database connection import
+import User from "../../../../../models/user";
+import { connectToDB } from "../../../../../util/database";
 
 // Define the auth options
 const authOptions = {
@@ -12,22 +12,32 @@ const authOptions = {
     }),
   ],
   callbacks: {
-    async session({ session, token, user }: any) {
+    async session({ session, token }: any) {
+      // Connect to DB
+      await connectToDB();
+      const dbUser = await User.findOne({ email: session.user.email });
+
+      if (dbUser) {
+        session.user.id = dbUser._id.toString();
+      }
+
       return session;
     },
 
-    async signIn({ account, profile, user, credentials }: any) {
+    async signIn({ account, profile }: any) {
       try {
-        // await connectToDB();  // Commenting out the database connection
+        await connectToDB();
+        console.log("Connected to DB");
 
-        // const checkEmail = await User.find({ email: user?.email });  // Commenting out the email check
+        const checkEmail = await User.findOne({ email: profile.email });
 
-        // if (checkEmail.length === 0 && user?.email) {
-        //   await User.insertMany({ name: user.name, email: user.email });  // Commenting out the user creation
-        // }
+        if (!checkEmail) {
+          await User.create({ name: profile.name, email: profile.email });
+          console.log("New user created");
+        }
         return true;
       } catch (error) {
-        console.log(error);
+        console.error("Error during sign-in:", error);
         return false;
       }
     },

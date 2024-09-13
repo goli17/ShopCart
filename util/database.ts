@@ -11,8 +11,7 @@ export const connectToDB = async () => {
   }
 
   try {
-    await mongoose.connect("mongodb://localhost:27017/ShopcartLogin");
-
+    await mongoose.connect(process.env.MONGO_DB as string);
     isConnected = true;
     console.log("connected to mongodb");
   } catch (e) {
