@@ -146,7 +146,7 @@ export default function Navbar() {
               isMenuOpen
                 ? "max-md:max-h-[420px] max-md:opacity-100"
                 : "max-md:max-h-0 max-md:opacity-0"
-            } overflow-hidden  transition-all duration-300 ease-in-out md:transition-none md:duration-0 md:ease-in-out`}
+            } overflow-hidden max-md:w-full transition-all duration-300 ease-in-out md:transition-none md:duration-0 md:ease-in-out`}
             id="navbar-default"
           >
             <ul className="font-medium flex flex-col gap-10 p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 text-white bg-gray-900">
