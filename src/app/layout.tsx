@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StoreProvider from "@/Lib/storeProvider";
 import AuthProvider from "@/components/AuthProvider";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +25,15 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           <Navbar />
-          <StoreProvider>{children}</StoreProvider>
+          <Suspense
+            fallback={
+              <p>
+                <Loading />
+              </p>
+            }
+          >
+            <StoreProvider>{children}</StoreProvider>
+          </Suspense>
         </AuthProvider>
         <Footer />
       </body>

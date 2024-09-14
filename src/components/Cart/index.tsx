@@ -84,9 +84,7 @@ export default function CartComponent() {
                         price: product?.price,
                         description: product?.description,
                         quantity: product.quantity,
-                        onAddToFavorites: function (): void {
-                          // Function not implemented.
-                        },
+                        onAddToFavorites: function (): void {},
                         onRemove: () => dispatch(removeFromCart(product.id)),
                         onUpdateQuantity: (newQuantity) =>
                           dispatch(

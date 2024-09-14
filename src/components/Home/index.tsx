@@ -29,12 +29,12 @@ export default function HomePage(params: any) {
   }
   const shuffledProducts = shuffleArray([...products]);
   return (
-    <div className="flex flex-col gap-1 pb-3 relative">
+    <div className="flex flex-col gap-1 pb-2 relative">
       <div className="relative w-full">
         <Image
           src={Poster}
           alt="Poster Image"
-          className="w-full max-h-[900px]"
+          className="w-full max-h-[900px] min-h-[250px] "
         />
         <div className="absolute inset-0 flex items-center justify-center text-center text-white">
           <div className="px-4">
