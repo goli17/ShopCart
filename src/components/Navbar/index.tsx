@@ -61,7 +61,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="sticky text-white bg-gray-900 max-md:py-4">
-        <div className="flex flex-wrap  max-md:flex-row items-center justify-between mx-5 p-4">
+        <div className="flex flex-wrap  max-md:flex-row items-center justify-evenly mx-auto p-4">
           <Link
             href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -76,7 +76,7 @@ export default function Navbar() {
           {/* Search Bar for larger screens */}
           <form
             onSubmit={handleSearch}
-            className="relative w-full max-w-[800px] mx-4 hidden lg:block"
+            className="relative w-full max-w-[600px] hidden lg:block"
           >
             <input
               type="text"
@@ -146,7 +146,7 @@ export default function Navbar() {
               isMenuOpen
                 ? "max-md:max-h-[420px] max-md:opacity-100"
                 : "max-md:max-h-0 max-md:opacity-0"
-            } overflow-hidden w-full md:w-auto transition-all duration-300 ease-in-out md:transition-none md:duration-0 md:ease-in-out`}
+            } overflow-hidden  transition-all duration-300 ease-in-out md:transition-none md:duration-0 md:ease-in-out`}
             id="navbar-default"
           >
             <ul className="font-medium flex flex-col gap-10 p-4 md:p-0 mt-4 border rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 text-white bg-gray-900">
