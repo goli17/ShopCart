@@ -61,7 +61,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="sticky text-white bg-gray-900 max-md:py-4">
-        <div className="flex  max-md:flex-row items-center justify-between mx-5 p-4">
+        <div className="flex flex-wrap  max-md:flex-row items-center justify-between mx-5 p-4">
           <Link
             href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
