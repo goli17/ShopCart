@@ -7,6 +7,7 @@ module.exports = {
       "imagekit.io",
       "cdn.dummyjson.com",
       "lh3.googleusercontent.com",
+      "docs.material-tailwind.com",
     ], // Add other domains as needed
   },
   env: {

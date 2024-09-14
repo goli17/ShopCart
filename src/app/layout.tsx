@@ -24,16 +24,19 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <Navbar />
-          <Suspense
-            fallback={
-              <p>
-                <Loading />
-              </p>
-            }
-          >
-            <StoreProvider>{children}</StoreProvider>
-          </Suspense>
+          <StoreProvider>
+            {" "}
+            <Navbar />
+            <Suspense
+              fallback={
+                <p>
+                  <Loading />
+                </p>
+              }
+            >
+              {children}
+            </Suspense>
+          </StoreProvider>
         </AuthProvider>
         <Footer />
       </body>
