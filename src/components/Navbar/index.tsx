@@ -61,7 +61,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="sticky text-white bg-gray-900 max-md:py-4">
-        <div className="flex max-w-[1800px] flex-wrap max-md:flex-row items-center justify-between mx-auto p-4">
+        <div className="flex  max-md:flex-row items-center justify-between mx-5 p-4">
           <Link
             href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -76,7 +76,7 @@ export default function Navbar() {
           {/* Search Bar for larger screens */}
           <form
             onSubmit={handleSearch}
-            className="relative w-full max-w-[800px] mx-4 hidden md:block"
+            className="relative w-full max-w-[800px] mx-4 hidden lg:block"
           >
             <input
               type="text"
