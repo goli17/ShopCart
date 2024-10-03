@@ -23,7 +23,7 @@ export default function SearchComponents() {
       <h1 className="text-[20px] font-bold my-10 max-md:my-5">
         Search Results for "{query}"
       </h1>
-      <div className="max-md:grid max-sm:grid-cols-1 max-md:grid-cols-2 flex flex-wrap items-center  gap-2">
+      <div className="max-md:grid max-sm:grid-cols-1 max-md:grid-cols-2  flex flex-wrap items-center  justify-center gap-2">
         {products && products.length > 0 ? (
           products.map((product: any) => (
             <ProductCard
@@ -38,7 +38,7 @@ export default function SearchComponents() {
             />
           ))
         ) : (
-          <div className="flex flex-col gap-2 items-center justify-center w-full h-full py-10">
+          <div className="flex flex-col gap-2 items-center justify-center w-full h-full max-md:py-4 py-10 ">
             <TbMoodEmpty className="text-[200px] text-gray-200" />
             <div className="text-center text-gray-500 mt-4">
               No Products Found
@@ -53,7 +53,17 @@ export default function SearchComponents() {
         )}
       </div>
       <div className="w-full">
-        <SaleComponents />
+        <div className="text-[25px] w-full m-auto flex flex-col gap-1">
+          <div className="w-full flex flex-wrap py-[100px] bg-gray-900 px-1">
+            <h1 className="text-[40px]  text-white font-bold px-4 max-md:text-center">
+              You May Also Like
+            </h1>
+            <hr className="text-white p-2 h-2 w-full"></hr>
+            <div className=" flex items-center justify-center gap-4 w-full">
+              <SaleComponents />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ export default function SaleComponents() {
   }
   const shuffledProducts = shuffleArray([...products]);
   return (
-    <div className="flex w-full flex-col gap-5 ">
+    <div className="flex w-full flex-col items-center justify-center gap-5 ">
       <div className=" w-full flex pb-5 flex-row flex-wrap  max-md:grid max-md:grid-cols-2 items-center justify-center gap-4">
         {shuffledProducts.length > 0 ? (
           shuffledProducts

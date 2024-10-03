@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/assets/icon.png";
@@ -19,6 +19,7 @@ export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useAppDispatch();
+  const modalRef = useRef<HTMLDivElement | null>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -39,6 +40,22 @@ export default function Navbar() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+  const handleClickOutside = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      closeModal();
+    }
+  };
+  useEffect(() => {
+    if (isModalOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isModalOpen]);
 
   if (pathname.includes("/login")) {
     return null;
@@ -60,7 +77,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky text-white bg-gray-900 max-md:py-4">
+      <nav className="  text-white bg-gray-900 max-md:py-4">
         <div className="flex flex-wrap  max-md:flex-row items-center justify-evenly mx-auto p-4">
           <Link
             href="/"
@@ -244,8 +261,21 @@ export default function Navbar() {
             </form>
           </div>
         )}
-
-        {isModalOpen && <LoginComponent />}
+        <div
+          tabIndex={1}
+          className="flex items-center justify-center top-[50%] left-[50%]"
+        >
+          {isModalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+              <div
+                ref={modalRef} // Set the reference for the modal
+                className="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm md:max-w-lg"
+              >
+                <LoginComponent />
+              </div>
+            </div>
+          )}
+        </div>
       </nav>
     </>
   );

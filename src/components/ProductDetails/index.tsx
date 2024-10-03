@@ -142,7 +142,8 @@ export default function ProductDetails({ params }: any) {
           <p className="text-lg text-gray-600 mb-4">{product.description}</p>
           <div className="flex items-center justify-between">
             <p className="text-xl font-bold mb-4">
-              Price: ₹ {(product.price * 83.89).toFixed(2)}
+              Price: ₹{" "}
+              {Number((product.price * 83.89).toFixed(2)).toLocaleString()}
             </p>
             <p className="text-md p-1 text-white text-center font-bold bg-green-500 mb-4">
               {product.discountPercentage}% OFF
