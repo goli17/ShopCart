@@ -20,7 +20,7 @@ export default function SearchComponents() {
       <h1 className="text-[20px] font-bold my-10 max-md:my-5">
         Search Results for "{query}"
       </h1>
-      <div className="max-md:grid max-sm:grid-cols-1 max-md:grid-cols-2 border-2   flex flex-wrap items-center  justify-center gap-2">
+      <div className="max-md:grid max-sm:grid-cols-1 max-md:grid-cols-2   flex flex-wrap items-center  justify-center gap-2">
         {products && products.length > 0 ? (
           products.map((product: any) => (
             <ProductCard
