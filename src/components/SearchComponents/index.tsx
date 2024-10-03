@@ -10,12 +10,9 @@ import { useRouter } from "next/navigation";
 
 export default function SearchComponents() {
   const searchParams = useSearchParams();
-  const query = searchParams.get("query"); // Get query parameter value
+  const query = searchParams.get("query");
   const router = useRouter();
-  // Access the products from the Redux store
   const products = useAppSelector(selectSearchResults);
-
-  // Log products for debugging
   console.log(products);
 
   return (
@@ -23,18 +20,18 @@ export default function SearchComponents() {
       <h1 className="text-[20px] font-bold my-10 max-md:my-5">
         Search Results for "{query}"
       </h1>
-      <div className="max-md:grid max-sm:grid-cols-1 max-md:grid-cols-2  flex flex-wrap items-center  justify-center gap-2">
+      <div className="max-md:grid max-sm:grid-cols-1 max-md:grid-cols-2 border-2   flex flex-wrap items-center  justify-center gap-2">
         {products && products.length > 0 ? (
           products.map((product: any) => (
             <ProductCard
-              key={product.id} // Ensure unique key for each item
+              key={product.id}
               image={product.images[0]}
               title={product.title}
               description={product.description}
               price={product.price}
               brand={product.brand}
               id={product.id}
-              category={undefined} // Adjust or remove if necessary
+              category={undefined}
             />
           ))
         ) : (
