@@ -38,7 +38,7 @@ export default function SearchComponents() {
             />
           ))
         ) : (
-          <div className="flex flex-col gap-2 items-center justify-center w-full h-full max-md:py-4 py-10 ">
+          <div className="flex flex-col gap-2 items-center justify-center w-full h-full max-md:py-0 py-10 ">
             <TbMoodEmpty className="text-[200px] text-gray-200" />
             <div className="text-center text-gray-500 mt-4">
               No Products Found
@@ -52,16 +52,15 @@ export default function SearchComponents() {
           </div>
         )}
       </div>
-      <div className="w-full">
-        <div className="text-[25px] w-full m-auto flex flex-col gap-1">
-          <div className="w-full flex flex-wrap py-[100px] bg-gray-900 px-1">
-            <h1 className="text-[40px]  text-white font-bold px-4 max-md:text-center">
-              You May Also Like
-            </h1>
-            <hr className="text-white p-2 h-2 w-full"></hr>
-            <div className=" flex items-center justify-center gap-4 w-full">
-              <SaleComponents />
-            </div>
+
+      <div className="text-[25px] w-full m-auto flex flex-col gap-1">
+        <div className="w-full flex flex-wrap py-[100px] bg-gray-900 px-1">
+          <h1 className="text-[40px]  text-white font-bold px-4 max-md:text-center">
+            You May Also Like
+          </h1>
+          <hr className="text-white p-2 h-2 w-full"></hr>
+          <div className=" flex items-center justify-center gap-4 w-full">
+            <SaleComponents />
           </div>
         </div>
       </div>
