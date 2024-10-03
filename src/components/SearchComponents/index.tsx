@@ -35,7 +35,7 @@ export default function SearchComponents() {
             />
           ))
         ) : (
-          <div className="flex flex-col gap-2 items-center justify-center w-full h-full max-md:py-0 py-10 ">
+          <div className="flex flex-col gap-2 items-center justify-center w-full  ">
             <TbMoodEmpty className="text-[200px] text-gray-200" />
             <div className="text-center text-gray-500 mt-4">
               No Products Found
